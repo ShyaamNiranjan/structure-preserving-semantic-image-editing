@@ -2,11 +2,11 @@
 
 A domain-agnostic, structure-preserving generative framework built on latent diffusion models for controlled semantic image augmentation.
 
-## 🎯 Overview
+##  Overview
 
 This system integrates image-to-image diffusion, semantic and structural perception, and incremental editing logic to modify real images based on user intent while preserving spatial layout, object boundaries, and visual realism through perceptual constraints and quantitative quality metrics.
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Backend (Python + FastAPI)
 - **ML Inference Engine**: Stable Diffusion image-to-image generation
@@ -23,7 +23,7 @@ This system integrates image-to-image diffusion, semantic and structural percept
 - Quality metrics display
 - Edit history tracking
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.10+
@@ -69,7 +69,7 @@ python main.py
 - Open `frontend/index.html` in your web browser
 - Or serve with a local web server for better CORS handling
 
-### 🖥️ CPU-Only Setup
+###  CPU-Only Setup
 
 If you're using a CPU-only machine, the system will automatically detect and optimize for CPU:
 
@@ -86,8 +86,8 @@ echo "FORCE_CPU=true" > .env
 ```
 
 3. **Expected Performance**:
-- ⏱️ **CPU**: 2-5 minutes per edit (slower but functional)
-- ⚡ **GPU**: 5-15 seconds per edit (recommended)
+-  **CPU**: 2-5 minutes per edit (slower but functional)
+-  **GPU**: 5-15 seconds per edit (recommended)
 
 The system will automatically:
 - Use fewer inference steps on CPU (10 vs 20)
@@ -95,7 +95,7 @@ The system will automatically:
 - Enable CPU memory optimizations
 - Fall back to CPU if CUDA is unavailable
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Paper Project/
@@ -135,7 +135,7 @@ Paper Project/
 └── README.md                  # This file
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 Key environment variables (`.env` file):
 
@@ -158,7 +158,7 @@ DATABASE_URL=sqlite:///metadata.db
 CUDA_VISIBLE_DEVICES=0
 ```
 
-## 🎨 Usage
+##  Usage
 
 ### Basic Workflow
 
@@ -215,7 +215,7 @@ response = requests.post('http://localhost:8000/api/edit', json=edit_request)
 result = response.json()
 ```
 
-## 🧠 Model Details
+##  Model Details
 
 ### Diffusion Model
 - **Base Model**: Stable Diffusion v1.5
@@ -236,7 +236,7 @@ result = response.json()
 - **Edge Preservation**: Edge overlap metrics
 - **Semantic Consistency**: Feature-based similarity
 
-## 📊 Performance
+##  Performance
 
 ### Hardware Requirements
 - **GPU**: CUDA-enabled, 6-8 GB VRAM minimum (recommended)
@@ -250,7 +250,7 @@ result = response.json()
 - **Memory Usage**: 4-6 GB GPU memory or 8GB+ RAM for CPU
 - **Quality**: High structural preservation (>0.8 SSIM typical)
 
-## 🔬 Research Applications
+##  Research Applications
 
 This system is designed for research in:
 - **Structure-preserving image generation**
@@ -259,7 +259,7 @@ This system is designed for research in:
 - **Quality assessment metrics**
 - **User-guided image synthesis**
 
-## 🛠️ Development
+##  Development
 
 ### Adding New Metrics
 ```python
@@ -285,7 +285,7 @@ def _apply_custom_constraints(self, image, structural_info):
     return constrained_image
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
@@ -317,11 +317,11 @@ def _apply_custom_constraints(self, image, structural_info):
 - Model loading: Check console output
 - API errors: Check browser console
 
-## 📝 License
+##  License
 
 This project is for research purposes. Please refer to the license file for usage terms.
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -329,7 +329,7 @@ This project is for research purposes. Please refer to the license file for usag
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📚 References
+##  References
 
 - Stable Diffusion: https://github.com/CompVis/stable-diffusion
 - Diffusers Library: https://github.com/huggingface/diffusers
@@ -337,7 +337,7 @@ This project is for research purposes. Please refer to the license file for usag
 - OpenCV: https://opencv.org/
 - Scikit-image: https://scikit-image.org/
 
-## 📞 Support
+##  Support
 
 For issues and questions:
 - Check the troubleshooting section
