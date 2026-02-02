@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StructureAI - Semantic Image Editing Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles-modern.css">
+    
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .demo-section {
+            margin-bottom: 3rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .demo-button {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .demo-button.secondary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+        }
+        
+        .theme-demo {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .screenshot-preview {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .screenshot-preview img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Demo Header -->
+    <div class="demo-container">
+        <div class="demo-section">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">
+                    StructureAI
+                    <span class="gradient-text">Semantic Editing</span>
+                </h1>
+                <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                    Experience instruction-driven image editing that preserves scene structure using perceptual constraints and quantitative quality metrics
+                </p>
+                
+                <div class="theme-demo">
+                    <button class="demo-button" onclick="openApp()">
+                        <i class="fas fa-rocket"></i> Launch App
+                    </button>
+                    <button class="demo-button secondary" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i> Toggle Theme
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="demo-section">
+            <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">
+                ✨ Modern Features
+            </h2>
+            
+            <div class="demo-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Glassmorphism Design</h3>
+                    <p class="feature-description">
+                        Beautiful frosted glass effects with backdrop blur and transparency for a premium, modern aesthetic.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="feature-title">Dark/Light Mode</h3>
+                    <p class="feature-description">
+                        Seamless theme switching with persistent preferences and optimized color schemes for any environment.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="feature-title">Smooth Animations</h3>
+                    <p class="feature-description">
+                        Fluid micro-interactions, hover effects, and transitions that make every interaction feel delightful.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Fully Responsive</h3>
+                    <p class="feature-description">
+                        Optimized for all devices from mobile phones to desktop monitors with adaptive layouts.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Real-time Metrics</h3>
+                    <p class="feature-description">
+                        Live quality metrics and performance indicators with beautiful visualizations.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="feature-title">Edit History</h3>
+                    <p class="feature-description">
+                        Complete timeline of all edits with restore functionality and detailed metadata.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI Components -->
+        <div class="demo-section">
+            <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">
+                🎨 UI Components
+            </h2>
+            
+            <div class="screenshot-preview">
+                <h3 style="margin-bottom: 1rem;">Modern Upload Interface</h3>
+                <div style="border: 2px dashed var(--border-color); border-radius: var(--radius-lg); padding: 3rem; text-align: center; background: var(--glass-bg);">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Drag & Drop your images here</h4>
+                    <p style="color: var(--text-secondary);">or click to browse</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="background: var(--bg-tertiary); padding: 0.5rem 1rem; border-radius: var(--radius-lg); font-size: 0.875rem;">
+                            PNG, JPG, BMP, TIFF • Max 50MB
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot-preview">
+                <h3 style="margin-bottom: 1rem;">Advanced Controls</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <label style="font-weight: 600;">Strength</label>
+                            <span style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: var(--radius-md); font-size: 0.875rem;">0.8</span>
+                        </div>
+                        <input type="range" style="width: 100%;" value="80" max="100">
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">How much to transform the image</p>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <label style="font-weight: 600;">Guidance</label>
+                            <span style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: var(--radius-md); font-size: 0.875rem;">7.5</span>
+                        </div>
+                        <input type="range" style="width: 100%;" value="50" max="100">
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">How closely to follow instructions</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot-preview">
+                <h3 style="margin-bottom: 1rem;">Quality Metrics Dashboard</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-lg); display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border-color);">
+                        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">SSIM</div>
+                            <div style="font-size: 1.125rem; font-weight: 700;">0.9542</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-lg); display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border-color);">
+                        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">LPIPS</div>
+                            <div style="font-size: 1.125rem; font-weight: 700;">0.1234</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-lg); display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border-color);">
+                        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">PSNR</div>
+                            <div style="font-size: 1.125rem; font-weight: 700;">28.5</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-lg); display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border-color);">
+                        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Structure</div>
+                            <div style="font-size: 1.125rem; font-weight: 700;">98.2%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="demo-section" style="text-align: center;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+                Ready to Transform Your Images?
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Experience the perfect blend of AI power and modern design
+            </p>
+            
+            <div>
+                <button class="demo-button" onclick="openApp()">
+                    <i class="fas fa-play"></i> Start Editing Now
+                </button>
+                <button class="demo-button secondary" onclick="learnMore()">
+                    <i class="fas fa-book"></i> Learn More
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize theme
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        function openApp() {
+            window.open('index-modern.html', '_blank');
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        function learnMore() {
+            alert('This demo showcases the modern UI design. The full app includes complete AI-powered image editing functionality!');
+        }
+        
+        // Add some interactive effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

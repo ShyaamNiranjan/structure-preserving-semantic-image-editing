@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure-Preserving Semantic Image Editing | AI-Powered Visual Enhancement</title>
+    <meta name="description" content="Instruction-driven image editing that preserves scene structure using perceptual constraints and quantitative quality metrics">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles-modern.css">
+    
+    <!-- Theme -->
+    <script>
+        // Theme initialization
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h1>StructureAI</h1>
+                        <span class="brand-tagline">Semantic. Preservative. Transformative.</span>
+                    </div>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                    <button class="info-btn" id="infoBtn" aria-label="Information">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Structure-Preserving Semantic
+                    <span class="gradient-text">Image Editing</span>
+                </h1>
+                <p class="hero-description">
+                    Instruction-driven image editing that preserves scene structure using perceptual constraints and quantitative quality metrics
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">≈95%</span>
+                        <span class="stat-label">Structural Similarity</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2.3s</span>
+                        <span class="stat-label">Avg. Processing (GPU)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Edit Types</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-grid">
+            <!-- Left Panel - Upload & Controls -->
+            <div class="left-panel">
+                <!-- Upload Section -->
+                <section class="upload-section glass-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cloud-upload-alt"></i> Upload Image</h2>
+                        <span class="device-badge" id="deviceBadge">
+                            <i class="fas fa-microchip"></i> CPU Mode
+                        </span>
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                        <div class="upload-content">
+                            <div class="upload-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="upload-text">
+                                <h3>Drop your image here</h3>
+                                <p>or click to browse</p>
+                                <span class="upload-formats">PNG, JPG, BMP, TIFF • Max 50MB</span>
+                            </div>
+                        </div>
+                        <div class="upload-progress" id="uploadProgress" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">Uploading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-info" id="uploadInfo" style="display: none;">
+                        <div class="file-preview">
+                            <img id="previewImage" alt="Preview">
+                            <div class="file-details">
+                                <span class="file-name" id="uploadedFileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                            </div>
+                        </div>
+                        <button id="removeImage" class="btn-remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Edit Controls -->
+                <section class="edit-section glass-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-magic"></i> Edit Instructions</h2>
+                    </div>
+                    
+                    <div class="edit-controls">
+                        <div class="input-group">
+                            <label for="instructionInput">What would you like to change?</label>
+                            <textarea id="instructionInput" placeholder="e.g., Change the wall color to blue, make the sky more dramatic, remove the background..." rows="3"></textarea>
+                            <div class="input-suggestions">
+                                <span class="suggestion-label">Try:</span>
+                                <button class="suggestion-chip" data-instruction="Change the background to a sunset">🌅 Sunset</button>
+                                <button class="suggestion-chip" data-instruction="Make colors more vibrant">🎨 Vibrant</button>
+                                <button class="suggestion-chip" data-instruction="Add dramatic lighting">💡 Lighting</button>
+                            </div>
+                        </div>
+                        
+                        <div class="parameters-grid">
+                            <div class="parameter-card">
+                                <div class="parameter-header">
+                                    <label for="strengthSlider">Strength</label>
+                                    <span class="parameter-value" id="strengthValue">0.8</span>
+                                </div>
+                                <input type="range" id="strengthSlider" min="0.1" max="1.0" step="0.1" value="0.8" class="slider">
+                                <div class="parameter-description">How much to transform the image</div>
+                            </div>
+                            
+                            <div class="parameter-card">
+                                <div class="parameter-header">
+                                    <label for="guidanceSlider">Guidance</label>
+                                    <span class="parameter-value" id="guidanceValue">7.5</span>
+                                </div>
+                                <input type="range" id="guidanceSlider" min="1.0" max="15.0" step="0.5" value="7.5" class="slider">
+                                <div class="parameter-description">How closely to follow instructions</div>
+                            </div>
+                            
+                            <div class="parameter-card">
+                                <div class="parameter-header">
+                                    <label for="stepsSlider">Steps</label>
+                                    <span class="parameter-value" id="stepsValue">20</span>
+                                </div>
+                                <input type="range" id="stepsSlider" min="10" max="50" step="5" value="20" class="slider">
+                                <div class="parameter-description">Number of refinement steps</div>
+                            </div>
+                        </div>
+                        
+                        <button id="applyEditBtn" class="btn-primary btn-large" disabled>
+                            <span class="btn-content">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                                <span>Apply Edit</span>
+                            </span>
+                            <div class="btn-loading" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                <span>Processing...</span>
+                            </div>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Metrics -->
+                <section class="metrics-section glass-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Quality Metrics</h2>
+                    </div>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">SSIM</span>
+                                <span class="metric-value" id="ssimValue">--</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">LPIPS</span>
+                                <span class="metric-value" id="lpipsValue">--</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">PSNR</span>
+                                <span class="metric-value" id="psnrValue">--</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Structure</span>
+                                <span class="metric-value" id="structureValue">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Panel - Image Display -->
+            <div class="right-panel">
+                <section class="comparison-section glass-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-columns"></i> Before & After</h2>
+                        <div class="comparison-controls">
+                            <button class="comparison-btn active" data-view="side-by-side">
+                                <i class="fas fa-columns"></i>
+                            </button>
+                            <button class="comparison-btn" data-view="slider">
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <button class="comparison-btn" data-view="diff">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="image-comparison" id="imageComparison">
+                        <div class="comparison-container">
+                            <div class="image-panel original-panel">
+                                <div class="image-header">
+                                    <span class="image-label">Original</span>
+                                    <button class="download-btn" id="downloadOriginal" style="display: none;">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="image-wrapper">
+                                    <div class="no-image-placeholder" id="originalPlaceholder">
+                                        <i class="fas fa-image"></i>
+                                        <span>Original image will appear here</span>
+                                    </div>
+                                    <img id="originalImage" style="display: none;" alt="Original">
+                                </div>
+                            </div>
+                            
+                            <div class="image-panel edited-panel">
+                                <div class="image-header">
+                                    <span class="image-label">Edited</span>
+                                    <button class="download-btn" id="downloadEdited" style="display: none;">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="image-wrapper">
+                                    <div class="no-image-placeholder" id="editedPlaceholder">
+                                        <i class="fas fa-magic"></i>
+                                        <span>Edited image will appear here</span>
+                                    </div>
+                                    <img id="editedImage" style="display: none;" alt="Edited">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slider Comparison (hidden by default) -->
+                        <div class="slider-comparison" id="sliderComparison" style="display: none;">
+                            <div class="slider-container">
+                                <div class="slider-image-wrapper">
+                                    <img id="sliderOriginal" alt="Original">
+                                    <div class="slider-overlay">
+                                        <img id="sliderEdited" alt="Edited">
+                                    </div>
+                                </div>
+                                <div class="slider-handle" id="sliderHandle">
+                                    <div class="slider-line"></div>
+                                    <div class="slider-button">
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History -->
+                <section class="history-section glass-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-history"></i> Edit History</h2>
+                        <button class="btn-clear-history" id="clearHistory">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="history-timeline" id="historyTimeline">
+                        <div class="history-empty">
+                            <i class="fas fa-clock"></i>
+                            <span>No edits yet</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Status Messages -->
+    <div class="status-container" id="statusContainer"></div>
+
+    <!-- Info Modal -->
+    <div class="modal-overlay" id="infoModal" style="display: none;">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-info-circle"></i> About StructureAI</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="info-section">
+                    <h4>🎯 What is Structure-Preserving Editing?</h4>
+                    <p>Our AI technology maintains the essential structural elements of your image while applying creative transformations. This ensures that object boundaries, spatial relationships, and visual coherence are preserved throughout the editing process.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h4>⚡ Performance Modes</h4>
+                    <div class="mode-info">
+                        <div class="mode-card">
+                            <i class="fas fa-microchip"></i>
+                            <div>
+                                <strong>CPU Mode</strong>
+                                <p>Structure analysis and preprocessing</p>
+                            </div>
+                        </div>
+                        <div class="mode-card">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <strong>GPU Mode</strong>
+                                <p>Full image generation capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h4>📊 Quality Metrics</h4>
+                    <ul>
+                        <li><strong>SSIM:</strong> Structural Similarity Index</li>
+                        <li><strong>LPIPS:</strong> Learned Perceptual Image Patch Similarity</li>
+                        <li><strong>PSNR:</strong> Peak Signal-to-Noise Ratio</li>
+                        <li><strong>Structure:</strong> Edge preservation score</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script-modern.js"></script>
+</body>
+</html>
